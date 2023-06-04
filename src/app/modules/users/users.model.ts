@@ -1,11 +1,15 @@
 import { Model, Schema, model } from 'mongoose'
 import { IUser } from './users.interface'
 
-type UserModel = Model<IUser, object>
+type UserModel = Model<IUser, Record<string, unknown>>
 
 const userSchema = new Schema<IUser>(
   {
-    id: { type: String, required: true, unique: true },
+    id: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     role: {
       type: String,
       required: true,
@@ -15,7 +19,8 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 )
-
 export const User = model<IUser, UserModel>('User', userSchema)
